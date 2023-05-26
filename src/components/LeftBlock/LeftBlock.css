@@ -1,0 +1,35 @@
+#leftBlock {
+  background-color: rgba(151, 157, 213, 0.499);
+  /* background: linear-gradient(
+    90deg,
+    rgba(151, 157, 213, 0.49352240896358546) 20%,
+    rgba(255, 255, 255, 1) 100%
+  ); */
+  border-radius: 0em 0em 0em 0em;
+  padding: 0em;
+  border: 0.5px solid lightgray;
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#givenTextHeader {
+  justify-self: flex-start;
+}
+
+#textBlock {
+  justify-self: center;
+  border-radius: 0.5em;
+  margin: auto 0;
+  padding: 2em 0.5em;
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  font-family: "Sen", sans-serif;
+}

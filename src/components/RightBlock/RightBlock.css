@@ -1,0 +1,31 @@
+#rightBlock {
+  background-color: rgb(255, 255, 255);
+  border-radius: 0em 0em 0em 0em;
+  padding: 0em;
+  border: 0.5px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#yourInputHeader {
+  justify-self: flex-start;
+}
+
+#userInputBlock {
+  background-color: rgb(255, 255, 255);
+  text-align: start;
+  vertical-align: top;
+  border-radius: 0.5em;
+  padding: 1em;
+  font-size: 2em;
+}
+
+#inputBarBlock {
+  justify-self: flex-end;
+  border: none;
+}
+
+.textareaBar {
+  background-color: rgb(252, 252, 252);
+}
