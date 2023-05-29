@@ -149,6 +149,7 @@ function App() {
           <button onClick={startRecording}>Start Recording</button>
           <button onClick={stopRecording}>Stop Recording</button>
           <button onClick={downloadscreenVideoFromBlobUrl}>Download video</button>
+          <button onClick={handleDownloadClick}>Download Logged Data</button>
           {/* <video src={mediaBlobUrl} autoplay loop controls></video> */}
           </div>
           {/* <div>

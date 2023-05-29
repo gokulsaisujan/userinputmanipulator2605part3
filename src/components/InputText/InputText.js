@@ -267,11 +267,11 @@ const s2ab = (s) => {
     downloadLoggedDataAsExcel();
   };
 
-  if (currentTaskNumber == 9){
-    if (currentGivenText == userInputText){
-    handleDownloadClick();
-    }
-  }
+  // if (currentTaskNumber == 9){
+  //   if (currentGivenText == userInputText){
+  //   handleDownloadClick();
+  //   }
+  // }
   
 
 
@@ -610,6 +610,7 @@ const s2ab = (s) => {
                   WELCOME TO TYPING SIMULATOR!
                   <br />
                   Please find the instructions below:
+                  <li>At any point, do not refresh as you progres will be lost</li>
                   <li>Enter your roll number in the field provided</li>
                   <li>Once you're okay with starting the game, Click on start recording button</li>
                   <li>Once you're done, click on stop recording button and download the video</li>
