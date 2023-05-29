@@ -6,6 +6,7 @@ import InputText from "./components/InputText/InputText";
 import UmContext from "./components/Context/UmContext";
 import GameOver from "./components/GameOver/GameOver";
 import { ReactMediaRecorder, useReactMediaRecorder } from "react-media-recorder";
+import * as XLSX from 'xlsx';
 
 // import { SpreadsheetApp } from 'google-apps-script';
 

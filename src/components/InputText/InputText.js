@@ -4,7 +4,7 @@ import LeftBlock from "../LeftBlock/LeftBlock";
 import RightBlock from "../RightBlock/RightBlock";
 import "./InputText.css";
 // import { GoogleSpreadsheet } from 'google-spreadsheet';
-import * as XLSX from 'xlsx';
+
 
 
 function InputText() {
