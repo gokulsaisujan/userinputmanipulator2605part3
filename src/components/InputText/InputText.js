@@ -212,61 +212,6 @@ const logDataToLocalStorage = () => {
 
 useEffect(()=>{logDataToLocalStorage()},[userInputText]);
 
-// Utility function to retrieve logged data from local storage
-const retrieveLoggedDataFromLocalStorage = () => {
-  const loggedData = JSON.parse(localStorage.getItem('loggedData') || '[]');
-  return loggedData;
-};
-
-
-
-
-const downloadLoggedDataAsExcel = () => {
-  // Retrieve the logged data from local storage
-  const loggedData = retrieveLoggedDataFromLocalStorage();
-
-  // Create a new workbook
-  const workbook = XLSX.utils.book_new();
-
-  // Create a new worksheet
-  const worksheet = XLSX.utils.json_to_sheet(loggedData);
-
-  // Add the worksheet to the workbook
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Logged Data');
-
-  // Convert the workbook to an Excel file
-  const excelData = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-
-  // Convert the array buffer to a Blob
-  const blob = new Blob([excelData], { type: 'application/octet-stream' });
-
-  // Create a download link and trigger the file download
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'logged_data.xlsx';
-  link.click();
-};
-
-
-
-
-
-
-// Utility function to convert string to ArrayBuffer
-const s2ab = (s) => {
-  const buf = new ArrayBuffer(s.length);
-  const view = new Uint8Array(buf);
-  for (let i = 0; i < s.length; i++) {
-    view[i] = s.charCodeAt(i) & 0xff;
-  }
-  return buf;
-};
-
-
-  const handleDownloadClick = () => {
-    downloadLoggedDataAsExcel();
-  };
-
   // if (currentTaskNumber == 9){
   //   if (currentGivenText == userInputText){
   //   handleDownloadClick();
