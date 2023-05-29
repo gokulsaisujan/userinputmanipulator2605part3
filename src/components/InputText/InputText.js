@@ -196,7 +196,7 @@ useEffect(() => {
 
 const logDataToLocalStorage = () => {
   const timestamp = new Date().toISOString();
-  const loggedData = { timestamp, userInputText };
+  const loggedData = { timestamp, userInputText, currentLastLetter, manipulateNow, currentTaskNumber };
 
   // Retrieve existing logged data from local storage
   const existingData = JSON.parse(localStorage.getItem('loggedData') || '[]');
@@ -211,6 +211,13 @@ const logDataToLocalStorage = () => {
 };
 
 useEffect(()=>{logDataToLocalStorage()},[userInputText]);
+
+// Utility function to retrieve logged data from local storage
+const retrieveLoggedDataFromLocalStorage = () => {
+  const loggedData = JSON.parse(localStorage.getItem('loggedData') || '[]');
+  return loggedData;
+};
+
 
 
 
@@ -240,11 +247,6 @@ const downloadLoggedDataAsExcel = () => {
   link.click();
 };
 
-// Utility function to retrieve logged data from local storage
-const retrieveLoggedDataFromLocalStorage = () => {
-  const loggedData = JSON.parse(localStorage.getItem('loggedData') || '[]');
-  return loggedData;
-};
 
 
 
@@ -267,7 +269,6 @@ const s2ab = (s) => {
 
   if (currentTaskNumber == 9){
     if (currentGivenText == userInputText){
-    console.log('Is game over?', isGameOver)
     handleDownloadClick();
     }
   }
@@ -315,7 +316,7 @@ const s2ab = (s) => {
     }
     else if (currentTaskNumber == 3){
       if (currentLastLetter == 'e') {
-        setUserInputText('Task failed')
+        setUserInputText('')
       }  
     }
 
