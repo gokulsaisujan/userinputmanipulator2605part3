@@ -6,7 +6,7 @@ import InputText from "./components/InputText/InputText";
 import UmContext from "./components/Context/UmContext";
 import GameOver from "./components/GameOver/GameOver";
 import { ReactMediaRecorder, useReactMediaRecorder } from "react-media-recorder";
-import * as XLSX from 'xlsx';
+
 // import { SpreadsheetApp } from 'google-apps-script';
 
 // import {useState, useRef} from "react";
@@ -18,56 +18,7 @@ import Text from "antd/lib/typography/Text";
 // import TextInputLogger from './Textinputlogger';
 
 
-const downloadLoggedDataAsExcel = () => {
-  // Retrieve the logged data from local storage
-  const loggedData = retrieveLoggedDataFromLocalStorage();
 
-  // Create a new workbook
-  const workbook = XLSX.utils.book_new();
-
-  // Create a new worksheet
-  const worksheet = XLSX.utils.json_to_sheet(loggedData);
-
-  // Add the worksheet to the workbook
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Logged Data');
-
-  // Convert the workbook to an Excel file
-  const excelData = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-
-  // Convert the array buffer to a Blob
-  const blob = new Blob([excelData], { type: 'application/octet-stream' });
-
-  // Create a download link and trigger the file download
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'logged_data.xlsx';
-  link.click();
-};
-
-// Utility function to retrieve logged data from local storage
-const retrieveLoggedDataFromLocalStorage = () => {
-  const loggedData = JSON.parse(localStorage.getItem('loggedData') || '[]');
-  return loggedData;
-};
-
-
-
-
-
-// Utility function to convert string to ArrayBuffer
-const s2ab = (s) => {
-  const buf = new ArrayBuffer(s.length);
-  const view = new Uint8Array(buf);
-  for (let i = 0; i < s.length; i++) {
-    view[i] = s.charCodeAt(i) & 0xff;
-  }
-  return buf;
-};
-
-
-  const handleDownloadClick = () => {
-    downloadLoggedDataAsExcel();
-  };
 
   
     
@@ -95,7 +46,7 @@ function App() {
   
   
   const { status, startRecording, stopRecording, mediaBlobUrl } =
-    useReactMediaRecorder({ video:true, screen: true});
+    useReactMediaRecorder({ video:true, screen: false});
   // const { statusvideo, startRecordingvideo, stopRecordingvideo, mediaBlobUrlvideo } =
   //   useReactMediaRecorder({ screen: true, video: false });
   // downloadRecordingPath="D:\Screen_Recording_Demo"
@@ -195,9 +146,9 @@ function App() {
     {/* </div> */}
         <div>
           <p>{status}</p> 
-          <button onClick={startRecording}>Start Screen Recording</button>
-          <button onClick={stopRecording}>Stop Screen Recording</button>
-          <button onClick={downloadscreenVideoFromBlobUrl}>Download</button>
+          <button onClick={startRecording}>Start Recording</button>
+          <button onClick={stopRecording}>Stop Recording</button>
+          <button onClick={downloadscreenVideoFromBlobUrl}>Download video</button>
           {/* <video src={mediaBlobUrl} autoplay loop controls></video> */}
           </div>
           {/* <div>
@@ -208,9 +159,9 @@ function App() {
           {/* <video src={mediaBlobUrlvideo} autoplay loop controls></video> */}
           {/* </div> */}
 
-          <div>
+          {/* <div>
           <button onClick={handleDownloadClick}>Download Logged Data</button>
-          </div>
+          </div> */}
 
         <div>
         <label htmlFor={'my-input'}>Enter text: </label>

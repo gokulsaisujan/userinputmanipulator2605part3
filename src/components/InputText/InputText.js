@@ -4,7 +4,7 @@ import LeftBlock from "../LeftBlock/LeftBlock";
 import RightBlock from "../RightBlock/RightBlock";
 import "./InputText.css";
 // import { GoogleSpreadsheet } from 'google-spreadsheet';
-
+import * as XLSX from 'xlsx';
 
 
 function InputText() {
@@ -176,6 +176,21 @@ function InputText() {
 
 // useEffect(()=>{logToGoogleSheet(userInputText)},[userInputText]);
 
+let currentUserInput = userInputText.toString();
+let currentUserInputLength = currentUserInput.length;
+let currentLastLetter = currentUserInput[currentUserInputLength - 1];
+
+useEffect(() => {
+  const handleBeforeUnload = () => {
+    localStorage.clear();
+  };
+
+  window.addEventListener('beforeunload', handleBeforeUnload);
+
+  return () => {
+    window.removeEventListener('beforeunload', handleBeforeUnload);
+  };
+}, []);
 
 
 
@@ -199,7 +214,64 @@ useEffect(()=>{logDataToLocalStorage()},[userInputText]);
 
 
 
+const downloadLoggedDataAsExcel = () => {
+  // Retrieve the logged data from local storage
+  const loggedData = retrieveLoggedDataFromLocalStorage();
 
+  // Create a new workbook
+  const workbook = XLSX.utils.book_new();
+
+  // Create a new worksheet
+  const worksheet = XLSX.utils.json_to_sheet(loggedData);
+
+  // Add the worksheet to the workbook
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Logged Data');
+
+  // Convert the workbook to an Excel file
+  const excelData = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+  // Convert the array buffer to a Blob
+  const blob = new Blob([excelData], { type: 'application/octet-stream' });
+
+  // Create a download link and trigger the file download
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'logged_data.xlsx';
+  link.click();
+};
+
+// Utility function to retrieve logged data from local storage
+const retrieveLoggedDataFromLocalStorage = () => {
+  const loggedData = JSON.parse(localStorage.getItem('loggedData') || '[]');
+  return loggedData;
+};
+
+
+
+
+
+// Utility function to convert string to ArrayBuffer
+const s2ab = (s) => {
+  const buf = new ArrayBuffer(s.length);
+  const view = new Uint8Array(buf);
+  for (let i = 0; i < s.length; i++) {
+    view[i] = s.charCodeAt(i) & 0xff;
+  }
+  return buf;
+};
+
+
+  const handleDownloadClick = () => {
+    downloadLoggedDataAsExcel();
+  };
+
+  if (currentTaskNumber == 9){
+    if (currentGivenText == userInputText){
+    console.log('Is game over?', isGameOver)
+    handleDownloadClick();
+    }
+  }
+  
 
 
 
@@ -537,6 +609,10 @@ useEffect(()=>{logDataToLocalStorage()},[userInputText]);
                   WELCOME TO TYPING SIMULATOR!
                   <br />
                   Please find the instructions below:
+                  <li>Enter your roll number in the field provided</li>
+                  <li>Once you're okay with starting the game, Click on start recording button</li>
+                  <li>Once you're done, click on stop recording button and download the video</li>
+                  <li>If you're prompted with any excel file downloads at the end of the game, be sure to save it </li>
                   <li>Type exactly what you see on your left screen.</li>
                   <li>Make sure to look at the screen at all times.</li>
                   <li> Do not turn your head away from the screen.</li>
