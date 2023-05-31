@@ -7,6 +7,7 @@ import UmContext from "./components/Context/UmContext";
 import GameOver from "./components/GameOver/GameOver";
 import { ReactMediaRecorder, useReactMediaRecorder } from "react-media-recorder";
 import * as XLSX from 'xlsx';
+import InstructionsModal from "./components/InstructionsModal";
 
 // import { SpreadsheetApp } from 'google-apps-script';
 
@@ -39,15 +40,63 @@ function App() {
   const [textToDisplay, setTextToDisplay] = useState(
     "Please start typing in the input box below ..."
   );
-  
+  const { status, startRecording, stopRecording, mediaBlobUrl } =
+    useReactMediaRecorder({ video:true, screen: false});
 
   const [roll, setroll] = useState('')
 
+  const [username, setUsername] = useState('');
+  const [recording, setRecording] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(true);
+  const closeModal = () => {setShowInstructions(false);};
+
+
+  useEffect(() => {
+    const storedShowInstructions = localStorage.getItem('showInstructions');
+    if (storedShowInstructions === 'false') {
+      setShowInstructions(false);
+    }
+  }, []);
+
+  const handleFormSubmit = (name) => {
+    setUsername(name);
+    setShowInstructions(false);
+    localStorage.setItem('showInstructions', 'false');
+    startRecording();
+  };
+
+  const handleStopRecording = () => {
+    stopRecording()
+    setRecording(false);
+  };
+
+  const handleDownloadVideo = () => {
+    // Logic to download the recorded video
+    const link = document.createElement('a');
+    link.href = mediaBlobUrl;
+    link.download = username.concat('.mp4');
+    link.click();
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //
+
 
   
   
-  const { status, startRecording, stopRecording, mediaBlobUrl } =
-    useReactMediaRecorder({ video:true, screen: false});
+  
   // const { statusvideo, startRecordingvideo, stopRecordingvideo, mediaBlobUrlvideo } =
   //   useReactMediaRecorder({ screen: true, video: false });
   // downloadRecordingPath="D:\Screen_Recording_Demo"
@@ -114,6 +163,13 @@ const s2ab = (s) => {
   const handleDownloadClick = () => {
     downloadLoggedDataAsExcel();
   };
+
+
+  if (currentTaskNumber == 9){
+    if (currentGivenText == userInputText){
+    handleDownloadClick();
+    }
+  }
 
 
   // function downloadVideoFromBlobUrl() {
@@ -199,14 +255,14 @@ const s2ab = (s) => {
       {/* Other components and content */}
       {/* <TextInputLogger /> */}
     {/* </div> */}
-        <div>
-          <p>{status}</p> 
-          <button onClick={startRecording}>Start Recording</button>
-          <button onClick={stopRecording}>Stop Recording</button>
-          <button onClick={downloadscreenVideoFromBlobUrl}>Download video</button>
-          <button onClick={handleDownloadClick}>Download Logged Data</button>
+        {/* <div> */}
+          {/* <p>{status}</p>  */}
+          {/* <button onClick={startRecording}>Start Recording</button> */}
+          {/* <button onClick={stopRecording}>Stop Recording</button> */}
+          {/* <button onClick={downloadscreenVideoFromBlobUrl}>Download video</button> */}
+          {/* <button onClick={handleDownloadClick}>Download Logged Data</button> */}
           {/* <video src={mediaBlobUrl} autoplay loop controls></video> */}
-          </div>
+          {/* </div> */}
           {/* <div>
           <p>{statusvideo}</p>
           <button onClick={startRecordingvideo}>Start Recording</button>
@@ -219,25 +275,19 @@ const s2ab = (s) => {
           <button onClick={handleDownloadClick}>Download Logged Data</button>
           </div> */}
 
-        <div>
-        <label htmlFor={'my-input'}>Enter text: </label>
-        <input
-          id={'my-input'}
-          type={'text'}
-          value={roll}
-          placeholder={'Type here'}
-          onChange={event => {
-            setroll(event.target.value)
-        }}
-      />
-        </div>
 
       <div className="App">
         <header className="App-header">
           <NavigationBar />
           {!isGameOver && <InputText />}
-          {isGameOver && <GameOver />}
+          {isGameOver && <GameOver 
+          onStopRecording={handleStopRecording}
+          onDownloadVideo={handleDownloadVideo}
+          on Downloadloggeddata={handleDownloadClick}/>}
         </header>
+      </div>
+      <div>
+      <InstructionsModal isOpen={showInstructions} onClose={closeModal} onSubmit={handleFormSubmit} />
       </div>
     </UmContext.Provider>
   );
