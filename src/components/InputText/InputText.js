@@ -212,11 +212,11 @@ const logDataToLocalStorage = () => {
 
 useEffect(()=>{logDataToLocalStorage()},[userInputText]);
 
-if (currentTaskNumber == 9){
-  if (currentGivenText == userInputText){
-  handleDownloadClick();
-    }
-   }
+// if (currentTaskNumber == 9){
+//   if (currentGivenText == userInputText){
+//   handleDownloadClick();
+//     }
+//    }
   
 
 
