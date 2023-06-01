@@ -66,8 +66,14 @@ function App() {
   };
 
   const handleStopRecording = () => {
-    stopRecording()
+    stopRecording();
     setRecording(false);
+    // const link = document.createElement('a');
+    // link.href = mediaBlobUrl;
+    // link.download = username.concat('.mp4');
+    // link.click();
+
+    // handleDownloadClick();
   };
 
   const handleDownloadVideo = () => {
@@ -119,29 +125,58 @@ const retrieveLoggedDataFromLocalStorage = () => {
 
 
 const downloadLoggedDataAsExcel = () => {
-  // Retrieve the logged data from local storage
-  const loggedData = retrieveLoggedDataFromLocalStorage();
+  // Throttling variables
+  let isFunctionRunning = false;
+  let timeoutId;
 
-  // Create a new workbook
-  const workbook = XLSX.utils.book_new();
+  // Throttled function
+  const throttledDownload = () => {
+    if (isFunctionRunning) {
+      console.log('Function is already running.');
+      return;
+    }
 
-  // Create a new worksheet
-  const worksheet = XLSX.utils.json_to_sheet(loggedData);
+    isFunctionRunning = true;
 
-  // Add the worksheet to the workbook
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Logged Data');
+    // Retrieve the logged data from local storage
+    const loggedData = retrieveLoggedDataFromLocalStorage();
 
-  // Convert the workbook to an Excel file
-  const excelData = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    // Create a new workbook
+    const workbook = XLSX.utils.book_new();
 
-  // Convert the array buffer to a Blob
-  const blob = new Blob([excelData], { type: 'application/octet-stream' });
+    // Create a new worksheet
+    const worksheet = XLSX.utils.json_to_sheet(loggedData);
 
-  // Create a download link and trigger the file download
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'logged_data.xlsx';
-  link.click();
+    // Add the worksheet to the workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Logged Data');
+
+    // Convert the workbook to an Excel file
+    const excelData = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+    // Convert the array buffer to a Blob
+    const blob = new Blob([excelData], { type: 'application/octet-stream' });
+
+    // Create a download link and trigger the file download
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = username.concat('logged_data.xlsx');
+    link.click();
+
+    // Reset the flag and schedule next execution
+    isFunctionRunning = false;
+    timeoutId = setTimeout(throttledDownload, 100000000); // Set your desired throttling interval
+  };
+
+  // Initial execution of the throttled function
+  throttledDownload();
+
+  // Cleanup function to clear the timeout on component unmount, if necessary
+  const cleanup = () => {
+    clearTimeout(timeoutId);
+  };
+
+  // Return the cleanup function in case you need to cancel the throttled execution externally
+  return cleanup;
 };
 
 
@@ -159,17 +194,34 @@ const s2ab = (s) => {
   return buf;
 };
 
-
+  // let downloadlogcalled = false;
   const handleDownloadClick = () => {
+    // Create a download link and trigger the file download
     downloadLoggedDataAsExcel();
+    // if (!downloadlogcalled) {
+    //   downloadlogcalled = true;
+    //   downloadLoggedDataAsExcel();
+    // }
   };
+  const downloadButton = document.getElementById('downloadButton'); // Replace 'downloadButton' with the actual ID of your button element
+
+  // downloadButton.addEventListener('click', handleDownloadClick);
+
 
 
   if (currentTaskNumber == 9){
-    if (currentGivenText == userInputText){
-    handleDownloadClick();
+    if (currentGivenText === userInputText){
+      setTimeout(() => { stopRecording();}, 300);
     }
   }
+
+  // const handlestopexperiment = () =>{
+  //   stopRecording()
+  //   // handleDownloadVideo()
+  //   console.log('handledownloadvideocalled')
+  //   handleDownloadClick()
+  //   console.log('handledownloadclickcalled')
+  // };
 
 
   // function downloadVideoFromBlobUrl() {
@@ -280,10 +332,13 @@ const s2ab = (s) => {
         <header className="App-header">
           <NavigationBar />
           {!isGameOver && <InputText />}
-          {isGameOver && <GameOver 
-          onStopRecording={handleStopRecording}
+          {isGameOver && 
+          <GameOver 
+          // onStopRecording={handleStopRecording}
           onDownloadVideo={handleDownloadVideo}
-          on Downloadloggeddata={handleDownloadClick}/>}
+          ondownloadloggeddata ={downloadLoggedDataAsExcel}
+          // onstopexperiment = {handlestopexperiment}
+          />}
         </header>
       </div>
       <div>

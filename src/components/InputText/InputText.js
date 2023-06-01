@@ -5,6 +5,7 @@ import RightBlock from "../RightBlock/RightBlock";
 import "./InputText.css";
 // import { GoogleSpreadsheet } from 'google-spreadsheet';
 import InstructionsModal from "../InstructionsModal";
+import { agreed } from "../InstructionsModal";
 
 
 function InputText() {
@@ -196,7 +197,7 @@ useEffect(() => {
 
 const logDataToLocalStorage = () => {
   const timestamp = new Date().toISOString();
-  const loggedData = { timestamp, userInputText, currentLastLetter, manipulateNow, currentTaskNumber };
+  const loggedData = { timestamp, userInputText, currentLastLetter, manipulateNow, currentTaskNumber};
 
   // Retrieve existing logged data from local storage
   const existingData = JSON.parse(localStorage.getItem('loggedData') || '[]');
