@@ -7,7 +7,7 @@ const GameOver = ({ onStopRecording, onDownloadVideo, handledownloadclick}) => {
       <h3>Game over. Thank you!</h3>
       <h4>Please refresh to restart the game.</h4>
       <br />
-      <button onClick={onStopRecording}>Stop Recording</button>
+//       <button onClick={onStopRecording}>Stop Recording</button>
       <button onClick={onDownloadVideo}>Download Video</button>
       <button onClick={handledownloadclick}>Download Logged Data</button>
       <p>
