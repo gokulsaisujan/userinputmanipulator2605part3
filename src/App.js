@@ -167,7 +167,7 @@ const s2ab = (s) => {
 
   if (currentTaskNumber == 9){
     if (currentGivenText == userInputText){
-    handleDownloadClick();
+      setTimeout(() => { stopRecording();}, 300);
     }
   }
 
@@ -281,7 +281,7 @@ const s2ab = (s) => {
           <NavigationBar />
           {!isGameOver && <InputText />}
           {isGameOver && <GameOver 
-          onStopRecording={handleStopRecording}
+//           onStopRecording={handleStopRecording}
           onDownloadVideo={handleDownloadVideo}
           on Downloadloggeddata={handleDownloadClick}/>}
         </header>
