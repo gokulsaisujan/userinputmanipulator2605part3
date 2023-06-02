@@ -499,13 +499,13 @@ useEffect(()=>{logDataToLocalStorage()},[userInputText]);
             <div className="col-md-4" id="submitBtnBlock">
               {!isTaskComplete && (
                 <>
-                  <button
+                  {/* <button
                     className="btn-secondary"
                     id="skipbtn"
                     onClick={handleSkip}
                   >
                     Skip
-                  </button>
+                  </button> */}
 
                   <button
                     className="btn-secondary"
@@ -557,17 +557,10 @@ useEffect(()=>{logDataToLocalStorage()},[userInputText]);
                   <br />
                   Please find the instructions below:
                   <li>At any point, do not refresh as you progres will be lost</li>
-                  <li>Enter your roll number in the field provided</li>
-                  <li>Once you're okay with starting the game, Click on start recording button</li>
-                  <li>Once you're done, click on stop recording button and download the video</li>
-                  <li>If you're prompted with any excel file downloads at the end of the game, be sure to save it </li>
+                  <li>Once you're done, download the video</li>
                   <li>Type exactly what you see on your left screen.</li>
                   <li>Make sure to look at the screen at all times.</li>
                   <li> Do not turn your head away from the screen.</li>
-                  <li>
-                    Once you press the 'Ok' button you have entered the
-                    simulator.
-                  </li>
                 </ol>
               </div>
               <div className="modal-footer">
