@@ -494,7 +494,7 @@ useEffect(()=>{logDataToLocalStorage()},[userInputText]);
       if (currentLastLetter == 'e') {
         let i = 0
         if (i < 1) {
-        setUserInputText(userInputText + 'eeeeeeee')
+        setUserInputText('A picture' + 'eeeeeeee')
         }
       }  
     }
