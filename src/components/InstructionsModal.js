@@ -107,6 +107,8 @@ const InstructionsModal = ({ isOpen, onClose, onSubmit }) => {
         <p>
           <li>Welcome to the Website responsiveness study. </li>
           <li>You will encounter 9 tasks and you have to type exactly what you see on your left screen in the box provided on the right side of your screen.</li>
+          <li>You will be moved to the next task only if your input matches the text on the left</li>
+          <li>Complete all the 9 tasks. Type carefully</li>
           <li>Enter your roll number in the field provided. If you don't have a roll number, type your name</li>
                     <li>Once you're okay with starting the game, tick the checkbox and wait for recording to start before starting with tasks</li>
                     <li>Do not refresh at any point after starting with the game as the progress will get lost</li>

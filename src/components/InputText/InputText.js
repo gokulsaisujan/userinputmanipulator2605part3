@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import UmContext from "../Context/UmContext";
 import LeftBlock from "../LeftBlock/LeftBlock";
 import RightBlock from "../RightBlock/RightBlock";
@@ -32,13 +32,15 @@ function InputText() {
   const [halfEraseDone, setHalfEraseDone] = useState(false);
   const [triedGarbageAddition, setTriedGarbageAddition] = useState(false);
   const [triedAdjAdd, setTriedAdjAdd] = useState(false);
-  const [manipulateNow, setManipulateNow] = useState(true);
+  const [manipulateNow, setManipulateNow] = useState(false);
   const [isStartedReplace, setIsStartedReplace] = useState(false);
+  const [ivariable, setivariable] = useState()
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     setTaskSubmitButtonDisabled(!userStartedInput);
   }, [userStartedInput]);
-  console.log(currentTaskNumber, manipulateNow);
+  // console.log(currentTaskNumber, manipulateNow);
 
 
   // useEffect(() => {
@@ -87,12 +89,238 @@ function InputText() {
     console.log("Hi");
     const interval = setTimeout(() => {
       setManipulateNow((prevState) => !prevState);
-    }, 5000);
+    }, 8000);
     console.log("===============================")
     console.log(currentTaskNumber)
     console.log("===============================")
     return () => clearTimeout(interval);
   }, [currentTaskNumber]);
+
+
+  
+  // useEffect(() => {setManipulateNow(true);}
+  // , [currentTaskNumber]);
+  // console.log(manipulateNow)
+
+
+  // const repeatedmanipulation = () => {
+  //   if (ivariable <=5) {
+  //       setivariable( ivariable+1)
+  //       setInterval(() => {setManipulateNow((prevState) => !prevState); }, 6000);
+  //       console.log('value of i', ivariable, manipulateNow)
+  //       }
+  //     else
+  //     {setManipulateNow(false)}
+
+  // }
+
+
+//   function repeatedmanipulation(callback, delay, repetitions) {
+//     var x = 0;
+//     var intervalID = window.setInterval(function () {
+//        callback();
+
+//        if (++x === repetitions) {
+//            window.clearInterval(intervalID);
+//        }
+//     }, delay);
+// }
+
+// repeatedmanipulation(setManipulateNow((prevState) => !prevState), 3000, 2 )
+
+// useEffect(() => {
+//   // Set manipulateNow to true at the beginning of each task
+//   setManipulateNow(true);
+
+//   const intervalID = setInterval(() => {
+//     setManipulateNow((prevValue) => !prevValue);
+//   }, 3000);
+//   console.log('Hi there hello', manipulateNow)
+
+//   // Clean up the interval on component unmount or task completion
+//   return () => clearInterval(intervalID);
+// }, [currentTaskNumber]);
+
+
+// useEffect(() => {
+//   // Set manipulateNow to true at the beginning of each task
+//   setManipulateNow(true);
+
+//   const intervalID = setInterval(() => {
+//     setManipulateNow((prevValue) => {
+//       // Check if the counter has reached the limit of 3
+//       if (counter >= 3) {
+//         clearInterval(intervalID); // Stop the interval
+//         return prevValue; // Keep the current value
+//       }
+
+//       // Increment the counter
+//       setCounter((prevCounter) => prevCounter + 1);
+
+//       // Toggle the value of manipulateNow
+//       return !prevValue;
+//     });
+//   }, 3000);
+
+//   // Clean up the interval on component unmount or task completion
+//   return () => clearInterval(intervalID);
+// }, [currentTaskNumber, counter]);
+
+console.log('manipulate now', manipulateNow)
+// useEffect (()=>{setManipulateNow(true)} ,[currentTaskNumber])
+
+
+
+// function secondfunction () {
+  
+//   setTimeout(thirdfunction,3000)
+// }
+
+// function thirdfunction () {
+//   setManipulateNow(false)
+// }
+
+// setTimeout(function firstfunction() {
+//   setManipulateNow(false);
+//   setTimeout(function secondfunction() {
+//     setManipulateNow(true);
+//   }, 3000);
+// }, 7000);
+
+
+
+
+// setTimeout(firstfunction, 7000)
+
+  // const [manipulatenow, setManipulatenow] = useState(false);
+  // const [taskComplete, setTaskComplete] = useState(false);
+  // const [cycles, setCycles] = useState(0);
+
+  // useEffect(() => {
+  //   if (!isTaskComplete && cycles < 3) {
+  //     const timeoutId = setTimeout(() => {
+  //       setManipulateNow(true);
+
+  //       const timeoutId2 = setTimeout(() => {
+  //         setManipulateNow(false);
+  //         setCycles(cycles + 1);
+  //       }, 3000);
+
+  //       // Cleanup function
+  //       return () => clearTimeout(timeoutId2);
+  //     }, cycles === 0 ? 0 : 3000);
+
+  //     // Cleanup function
+  //     return () => clearTimeout(timeoutId);
+  //   }
+  // }, [isTaskComplete, cycles, currentTaskNumber]);
+
+
+  
+
+  // const [manipulatenow, setManipulatenow] = useState(false);
+  // const [taskComplete, setTaskComplete] = useState(false);
+  // const [cycles, setCycles] = useState(0);
+  // const [currentTask, setCurrentTask] = useState(1); 
+
+  // First effect: Set 'manipulatenow' to true, wait 3 seconds, then set to false
+  // useEffect(() => {
+  //   if (!isTaskComplete && cycles < 3) {
+  //     setManipulateNow(true);
+
+  //     const timeoutId = setTimeout(() => {
+  //       setManipulateNow(false);
+  //       setCycles(prevCycles => prevCycles + 1);
+  //     }, 3000);
+
+  //     return () => clearTimeout(timeoutId);
+  //   }
+  // }, [isTaskComplete, cycles, currentTaskNumber]);
+
+  // // Second effect: If 'manipulatenow' is false and we have not done 3 cycles yet, set it to true
+  // useEffect(() => {
+  //   if (!manipulateNow&& !isTaskComplete && cycles < 3) {
+  //     const timeoutId = setTimeout(() => {
+  //       setManipulateNow(true);
+  //     }, 3000);
+
+  //     return () => clearTimeout(timeoutId);
+  //   }
+  // }, [manipulateNow, isTaskComplete, cycles]);
+
+  // Some code here to handle task completion and call setTaskComplete(true) when task is completed
+  // Some code here to handle changing tasks and call setCurrentTask with the new task number
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+// function useRepeatedManipulation(callback, delay, repetitions) {
+//   const intervalID = useRef(null);
+//   const count = useRef(0);
+
+//   useEffect(() => {
+//     intervalID.current = setInterval(() => {
+//       callback();
+//       console.log(count.current, 'count', manipulateNow)
+
+//       count.current++;
+
+//       if (count.current === repetitions) {
+//         clearInterval(intervalID.current);
+//       }
+//     }, delay);
+
+//     return () => {
+//       clearInterval(intervalID.current);
+//     };
+//   }, [callback, delay, repetitions]);
+// }
+
+// Usage within a React component
+
+  // useRepeatedManipulation(() => {
+  //   setManipulateNow((prevState) => !prevState);
+  // }, 3000, 2);
+
+
+
+  
+
+
+
+
+  
+  
+    // if (ivariable <=5) {
+    //   setivariable( ivariable+1)
+    //   setInterval(() => {setManipulateNow((prevState) => !prevState); }, 6000);
+    //   console.log('value of i', ivariable, manipulateNow)
+    //   }
+    // else
+    // {setManipulateNow(false)}
+
+    // useEffect(()=>{setivariable(0);},[currentTaskNumber])
+  
+  
+ 
+  // setInterval(() => {setManipulateNow((prevState) => !prevState);
+  // }, 4000);
+  // const interval = setTimeout(() => {
+  //   setManipulateNow((prevState) => !prevState);
+  // }, 5000);
+  
 
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -208,7 +436,7 @@ const logDataToLocalStorage = () => {
   // Save the updated data to local storage
   localStorage.setItem('loggedData', JSON.stringify(updatedData));
 
-  console.log('Data logged to local storage!');
+  // console.log('Data logged to local storage!');
 };
 
 useEffect(()=>{logDataToLocalStorage()},[userInputText]);
@@ -253,21 +481,27 @@ useEffect(()=>{logDataToLocalStorage()},[userInputText]);
       setUserInputText(userInputText)
     }
     else if (currentTaskNumber == 2){
-      if(currentUserInputLength == 4){
-    setUserInputText(userInputText.slice(0,-3))}
-      else{
+
+      
+      if(currentUserInputLength == 6){
+    setUserInputText(userInputText.slice(0,-4))}
+      else {
         setUserInputText(userInputText)
       }
 
     }
     else if (currentTaskNumber == 3){
       if (currentLastLetter == 'e') {
-        setUserInputText('')
+        let i = 0
+        if (i < 1) {
+        setUserInputText(userInputText + 'eeeeeeee')
+        }
       }  
     }
 
     else if (currentTaskNumber == 4){
-      setUserInputText('             ')
+        setUserInputText('             ')
+      
     }
 
     
@@ -278,16 +512,26 @@ useEffect(()=>{logDataToLocalStorage()},[userInputText]);
       // setCurrentManipulateAttempt(currentManipulateAttempt + 1);
       // setManipulateNow(false);
       // return;
-     else if ((currentTaskNumber == 5 && !triedGarbageAddition) ||(currentTaskNumber == 9 && !triedGarbageAddition)) {
+     else if ((currentTaskNumber == 5 && !triedGarbageAddition && currentManipulateAttempt <= 3) ||(currentTaskNumber == 9 && currentManipulateAttempt <= 6)) {
       const manipulatedText = addGarbageString(currentUserInput);
       setUserInputText(manipulatedText);
+      // function manipulatetruer() {
+      //   setManipulateNow(true)
+      // }
+      function garbagefalser(){
+        setTriedGarbageAddition(false)
+        // setTimeout(manipulatetruer,3000)
+        
+      }
       setTriedGarbageAddition(true);
+      console.log('Triedgarbageaddition',triedGarbageAddition)
+      setTimeout(garbagefalser, 3000);
       setCurrentManipulateAttempt(currentManipulateAttempt + 1);
       // console.log(currentManipulateAttempt);
       // setManipulateNow(false);
       return;
     } else if(currentTaskNumber==6){
-      if (currentUserInputLength == 19){
+      if (currentUserInputLength == 12){
         handleSkip();
       // setManipulateNow(true);
       // // setIsTaskComplete(false);
@@ -305,7 +549,7 @@ useEffect(()=>{logDataToLocalStorage()},[userInputText]);
 
     }
     
-    else if (currentTaskNumber == 7 && !triedAdjAdd) {
+    else if (currentTaskNumber == 7 && !triedAdjAdd && currentUserInputLength > 3) {
       const randomInt = Math.floor(Math.random() * 3) + 1;
       const manipulatedText =
         replaceWithPreviousOrNextOrAdjacentLettersOnKeyboard(
@@ -315,11 +559,20 @@ useEffect(()=>{logDataToLocalStorage()},[userInputText]);
         );
       setUserInputText(manipulatedText);
       setTriedAdjAdd(true);
+      function triedadjfalser(){
+        setTriedGarbageAddition(false)
+      }
+      setTimeout(triedadjfalser, 2000);
       setCurrentManipulateAttempt(currentManipulateAttempt + 1);
       // // setManipulateNow(false);
       // return;
     } 
-    else {}
+    else {
+      if (currentManipulateAttempt == 4) {
+      const manipulatedText = eraseHalfInputAndReturn(currentUserInput)
+      setUserInputText(manipulatedText);
+      }
+    }
   };
   
   const addGarbageString = (currentUserInput) => {
