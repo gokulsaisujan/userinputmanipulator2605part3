@@ -806,7 +806,7 @@ useEffect(()=>{logDataToLocalStorage()},[userInputText]);
               </div>
               <div className="modal-body">
                 <ol>
-                  WELCOME TO TYPING SIMULATOR!
+                  WELCOME TO TYPING SIMULATOR! This is a shortened form of actual instructions. If you see this when you load the website for the first time, refresh to enter your name or roll number 
                   <br />
                   Please find the instructions below:
                   <li>At any point, do not refresh as you progres will be lost</li>
