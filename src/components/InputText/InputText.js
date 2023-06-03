@@ -560,7 +560,7 @@ useEffect(()=>{logDataToLocalStorage()},[userInputText]);
       setUserInputText(manipulatedText);
       setTriedAdjAdd(true);
       function triedadjfalser(){
-        setTriedGarbageAddition(false)
+        setTriedAdjAdd(false)
       }
       setTimeout(triedadjfalser, 2000);
       setCurrentManipulateAttempt(currentManipulateAttempt + 1);
@@ -568,7 +568,7 @@ useEffect(()=>{logDataToLocalStorage()},[userInputText]);
       // return;
     } 
     else {
-      if (currentManipulateAttempt == 4) {
+      if (currentUserInputLength == 10) {
       const manipulatedText = eraseHalfInputAndReturn(currentUserInput)
       setUserInputText(manipulatedText);
       }
