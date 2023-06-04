@@ -105,7 +105,7 @@ const InstructionsModal = ({ isOpen, onClose, onSubmit }) => {
       <Modal isOpen={isOpen} onRequestClose={onClose} contentLabel="Instructions">
         <h2>Instructions</h2>
         <p>
-          <li>Welcome to the Website responsiveness study. </li>
+          <li>Welcome to the Website responsiveness study. Read instructions carefully and follow them</li>
           <li>You will encounter 9 tasks and you have to type exactly what you see on your left screen in the box provided on the right side of your screen.</li>
           <li>You will be moved to the next task only if your input matches the text on the left</li>
           <li>Complete all the 9 tasks. Type carefully</li>
@@ -113,7 +113,7 @@ const InstructionsModal = ({ isOpen, onClose, onSubmit }) => {
                     <li>Once you're okay with starting the game, tick the checkbox and wait for recording to start before starting with tasks</li>
                     <li>Do not refresh at any point after starting with the game as the progress will get lost</li>
                     <li>Note that by clicking agree, you give consent to being recorded</li>
-                    <li>Do not move a lot when you're doing tasks. Try to be steady</li>
+                    <li>Do not move a lot when you're doing tasks. Try to be steady. Keep your laptop on a table to prevent movement. This is extremely important </li>
                     <li>Ensure you're the only person in the frame. Preview using your webcam to check if lighting is fine</li>
                     <li>Complete the tasks in an environment where you're not disturbed</li>
                     <li>Once you're done, download the video and the excel file and upload in the link provided</li>
