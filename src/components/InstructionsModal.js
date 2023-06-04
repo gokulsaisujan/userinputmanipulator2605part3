@@ -113,6 +113,8 @@ const InstructionsModal = ({ isOpen, onClose, onSubmit }) => {
                     <li>Once you're okay with starting the game, tick the checkbox and wait for recording to start before starting with tasks</li>
                     <li>Do not refresh at any point after starting with the game as the progress will get lost</li>
                     <li>Note that by clicking agree, you give consent to being recorded</li>
+                    <li>Do not move a lot when you're doing tasks. Try to be steady</li>
+                    <li>Ensure you're the only person in the frame. Preview using your webcam to check if lighting is fine</li>
                     <li>Once you're done, download the video and the excel file and upload in the link provided</li>
                     <li>Make sure to look at the screen at all times.</li>
                     <li> Do not turn your head away from the screen. Play the game in a well lit environment</li>
